@@ -1,8 +1,12 @@
 import numpy as np
 
 def gradientDescent(n_samples, lr, X, y, y_pred):
-    d_weigths = (1 / n_samples) * np.dot(X.T, (y_pred - y)) # d_weights = 1 / n * ∑(y_prediction - y_actual) *  X
-    d_bias = (1 / n_samples) * np.sum(y_pred - y)           # d_bias = 1 / n * ∑(y_prediction - y_actual)
+    # find best weight
+    
+    d_weigths = (1 / n_samples) * np.dot(X.T, (y_pred - y)) 
+    # d_weights = 1 / n * ∑(y_prediction - y_actual) *  X
+    d_bias = (1 / n_samples) * np.sum(y_pred - y)           
+    # d_bias = 1 / n * ∑(y_prediction - y_actual)
     
     weights_gradient = lr * d_weigths
     bias_gradient = lr * d_bias
@@ -22,12 +26,15 @@ class LinearRegression:
         self.n_samples = 0
         self.weights_history = []
         self.bias_history = []
-     
+        
     # Evaluation + Optimization   
     def training(self, X, y):
-        n_samples, n_features = X.shape     # in the shape of n x m, which means n is number of samples and m means number of features
+        # n => sample, m => features
+        n_samples, n_features = X.shape     
         self.n_samples = n_samples          # set default number of samples
-        self.weights = np.zeros(n_features) # wights will be zero for all feature at the first time and the size of array depends on the total of features
+        self.weights = np.zeros(n_features) 
+        # 1st time => weight = 0
+        # weight array n => feature member
         
         for _ in range(self.n_iters):
             y_pred = self.prediction(X)
